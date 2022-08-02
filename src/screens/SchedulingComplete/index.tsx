@@ -1,5 +1,6 @@
 import React from "react";
-import { useWindowDimensions } from "react-native";
+import { StatusBar, useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { ButtonComplete } from "../../components/ButtonComplete";
 
@@ -10,9 +11,19 @@ import { Container, Content, Title, Message, Footer } from "./styles";
 
 export function SchedulingComplete() {
   const { width } = useWindowDimensions();
+  const { navigate } = useNavigation();
 
+  function handleConfirm() {
+    navigate("Home");
+  }
   return (
     <Container>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
       <BrandSvg width={width} />
 
       <Content>
@@ -27,7 +38,7 @@ export function SchedulingComplete() {
       </Content>
 
       <Footer>
-        <ButtonComplete title="OK" />
+        <ButtonComplete title="OK" onPress={handleConfirm} />
       </Footer>
     </Container>
   );
