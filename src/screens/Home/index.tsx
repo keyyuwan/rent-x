@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useNavigation } from "@react-navigation/native";
 
+import { api } from "../../services/api";
+import { CarDTO } from "../../dtos/CarDTO";
+
 import { CarCard } from "../../components/CarCard";
+import { Loading } from "../../components/Loading";
 
 import Logo from "../../assets/logo.svg";
 import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
@@ -11,20 +15,28 @@ import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
 export function Home() {
   const { navigate } = useNavigation();
 
-  const car = {
-    brand: "audi",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "Ao dia",
-      price: 120,
-    },
-    thumbnail:
-      "https://w7.pngwing.com/pngs/483/821/png-transparent-2018-audi-s5-3-0t-premium-plus-coupe-audi-rs5-2017-audi-s5-car-audi-compact-car-sedan-car.png",
-  };
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [isFetching, setIsFetching] = useState(true);
 
-  function handleCarDetails() {
-    navigate("CarDetails");
+  function handleCarDetails(car: CarDTO) {
+    navigate("CarDetails", { car });
   }
+
+  useEffect(() => {
+    async function fetchCars() {
+      try {
+        const { data } = await api.get("/cars");
+
+        setCars(data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsFetching(false);
+      }
+    }
+
+    fetchCars();
+  }, []);
 
   return (
     <Container>
@@ -37,17 +49,21 @@ export function Home() {
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
 
-          <TotalCars>Total de 12 carros</TotalCars>
+          <TotalCars>Total de {cars.length} carros</TotalCars>
         </HeaderContent>
       </Header>
 
-      <CarList
-        data={[1, 2, 3, 4, 5, 6]}
-        keyExtractor={(item) => String(item)}
-        renderItem={({ item }) => (
-          <CarCard data={car} onPress={handleCarDetails} />
-        )}
-      />
+      {isFetching ? (
+        <Loading />
+      ) : (
+        <CarList
+          data={cars}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <CarCard data={item} onPress={() => handleCarDetails(item)} />
+          )}
+        />
+      )}
     </Container>
   );
 }
