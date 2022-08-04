@@ -82,7 +82,7 @@ export const Accessories = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  margtin-top: 16px;
+  margin-top: 16px;
 `;
 
 export const RentalPeriod = styled.View`
