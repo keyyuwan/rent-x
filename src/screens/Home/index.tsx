@@ -18,7 +18,7 @@ import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
 import { CarCard } from "../../components/CarCard";
-import { Loading } from "../../components/Loading";
+import { AnimatedLoading } from "../../components/AnimatedLoading";
 
 import Logo from "../../assets/logo.svg";
 import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
@@ -101,7 +101,7 @@ export function Home() {
       </Header>
 
       {isFetching ? (
-        <Loading />
+        <AnimatedLoading />
       ) : (
         <CarList
           data={cars}

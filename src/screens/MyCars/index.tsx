@@ -9,7 +9,7 @@ import { api } from "../../services/api";
 
 import { GoBackButton } from "../../components/GoBackButton";
 import { CarCard } from "../../components/CarCard";
-import { Loading } from "../../components/Loading";
+import { AnimatedLoading } from "../../components/AnimatedLoading";
 
 import {
   Container,
@@ -81,7 +81,7 @@ export function MyCars() {
       </Header>
 
       {isFetching ? (
-        <Loading />
+        <AnimatedLoading />
       ) : (
         <Content>
           <Appointments>
