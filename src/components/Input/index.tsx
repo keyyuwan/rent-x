@@ -41,6 +41,7 @@ export function Input({ iconName, value, ...rest }: InputProps) {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         isFocused={isFocused}
+        placeholderTextColor={theme.colors.text}
         {...rest}
       />
     </Container>

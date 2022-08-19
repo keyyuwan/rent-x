@@ -9,13 +9,17 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
 import { SignIn } from "../screens/SignIn";
+import { FirstStep } from "../screens/SignUp/FirstStep";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export function AppRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false }} initialRouteName="SignIn">
-      <Screen name="SignIn" component={SignIn} />
+    <Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="FirstStep"
+    >
+      <Screen name="FirstStep" component={FirstStep} />
       <Screen
         name="Home"
         component={Home}
