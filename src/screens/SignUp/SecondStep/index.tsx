@@ -35,7 +35,7 @@ interface Params {
 export function SecondStep() {
   const theme = useTheme();
   const route = useRoute();
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
 
   const { user } = route.params as Params;
 
@@ -56,6 +56,13 @@ export function SecondStep() {
       Alert.alert("As senhas devem ser iguais");
       return;
     }
+
+    //TODO: enviar dados para API para Cadastrar
+    navigate("Confirmation", {
+      nextScreenRoute: "SignIn",
+      title: "Conta criada!",
+      message: `Agora é só fazer login\ne aproveitar`,
+    });
   }
 
   return (

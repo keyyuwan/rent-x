@@ -7,7 +7,7 @@ export declare global {
       CarDetails: { car: CarDTO };
       Scheduling: { car: CarDTO };
       SchedulingDetails: { car: CarDTO; dates: string[] };
-      SchedulingComplete: undefined;
+      Confirmation: { title: string; message: string; nextScreenRoute: string };
       MyCars: undefined;
       FirstStep: undefined;
       SecondStep: {
