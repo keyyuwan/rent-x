@@ -10,6 +10,9 @@ export declare global {
       SchedulingComplete: undefined;
       MyCars: undefined;
       FirstStep: undefined;
+      SecondStep: {
+        user: { name: string; email: string; driverLicense: string };
+      };
     }
   }
 }

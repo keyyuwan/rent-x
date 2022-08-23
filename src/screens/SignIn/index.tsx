@@ -96,7 +96,7 @@ export function SignIn() {
               title="Criar conta gratuita"
               color={theme.colors.background_secondary}
               onPress={handleNewAccount}
-              enabled={false}
+              enabled
               isLoading={false}
               light
             />

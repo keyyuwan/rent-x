@@ -10,16 +10,16 @@ import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
 import { SignIn } from "../screens/SignIn";
 import { FirstStep } from "../screens/SignUp/FirstStep";
+import { SecondStep } from "../screens/SignUp/SecondStep";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export function AppRoutes() {
   return (
-    <Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="FirstStep"
-    >
+    <Navigator screenOptions={{ headerShown: false }} initialRouteName="SignIn">
+      <Screen name="SignIn" component={SignIn} />
       <Screen name="FirstStep" component={FirstStep} />
+      <Screen name="SecondStep" component={SecondStep} />
       <Screen
         name="Home"
         component={Home}
