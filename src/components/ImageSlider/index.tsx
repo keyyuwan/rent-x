@@ -6,7 +6,10 @@ import { BulletPoint } from "../BulletPoint";
 import { Container, ImageIndexes, CarImageWrapper, CarImage } from "./styles";
 
 interface ImageSliderProps {
-  imagesUrl: string[];
+  imagesUrl: {
+    id: string;
+    photo: string;
+  }[];
 }
 
 interface IChangeImage {
@@ -25,17 +28,17 @@ export function ImageSlider({ imagesUrl }: ImageSliderProps) {
   return (
     <Container>
       <ImageIndexes>
-        {imagesUrl.map((_, index) => (
-          <BulletPoint key={String(index)} active={index === imageIndex} />
+        {imagesUrl.map((item, index) => (
+          <BulletPoint key={item.id} active={index === imageIndex} />
         ))}
       </ImageIndexes>
 
       <FlatList
         data={imagesUrl}
-        keyExtractor={(key) => key}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CarImageWrapper>
-            <CarImage source={{ uri: item }} resizeMode="contain" />
+            <CarImage source={{ uri: item.photo }} resizeMode="contain" />
           </CarImageWrapper>
         )}
         horizontal

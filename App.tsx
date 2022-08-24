@@ -13,6 +13,7 @@ import {
 import AppLoading from "expo-app-loading";
 
 import { Routes } from "./src/routes";
+import { AuthProvider } from "./src/contexts/AuthContext";
 
 import theme from "./src/styles/theme";
 
@@ -31,7 +32,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
