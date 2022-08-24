@@ -9,6 +9,8 @@ import {
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
+import { api } from "../../../services/api";
+
 import { GoBackButton } from "../../../components/GoBackButton";
 import { BulletPoint } from "../../../components/BulletPoint";
 import { PasswordInput } from "../../../components/PasswordInput";
@@ -57,12 +59,22 @@ export function SecondStep() {
       return;
     }
 
-    //TODO: enviar dados para API para Cadastrar
-    navigate("Confirmation", {
-      nextScreenRoute: "SignIn",
-      title: "Conta criada!",
-      message: `Agora é só fazer login\ne aproveitar`,
-    });
+    try {
+      await api.post("/users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
+      });
+
+      navigate("Confirmation", {
+        nextScreenRoute: "SignIn",
+        title: "Conta criada!",
+        message: `Agora é só fazer login\ne aproveitar`,
+      });
+    } catch (err) {
+      Alert.alert("Opa!", "Não foi possível realizar seu cadastro :(");
+    }
   }
 
   return (
