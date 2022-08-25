@@ -21,6 +21,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: IUser;
+  isAuthenticated: boolean;
   signIn: (credentials: SignInCredentials) => Promise<void>;
 }
 
@@ -52,7 +53,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider
+      value={{ user: data.user, isAuthenticated: !!data.user, signIn }}
+    >
       {children}
     </AuthContext.Provider>
   );
